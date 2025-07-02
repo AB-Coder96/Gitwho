@@ -6,7 +6,7 @@
 
 ## ✨ Features
 
-* Interactive, colourised menu (win‑acme style).
+* Interactive, colourised menu.
 * Marks the **current** author with `*`.
 * Add new profiles in‑tool – no JSON editing required.
 * Zero install: copy `gitwho.ps1` next to your repo and run `./gitwho`.
@@ -14,35 +14,20 @@
 
 ---
 
-## 📦 Quick start (no install)
+## 📦 Quick start
+
+Copy **gitwho.ps1** into any Git repository (or a folder already on your `PATH`) and run:
 
 ```powershell
-# inside any folder
-curl -o gitwho.ps1 https://raw.githubusercontent.com/<you>/gitwho/main/gitwho.ps1
-
-./gitwho.ps1   # launch the menu
+./gitwho.ps1
 ```
 
-First run will create an empty profile store at:
+The first run creates `C:\ProgramData\git-who\profiles.json`. Use **A** (Add) in the menu to add profiles.
 
-```
-C:\ProgramData\git-who\profiles.json
-```
-
-Use **A** (Add) to create your first profile.
-
-> **Execution policy:** if PowerShell refuses to run the script, enable local scripts once per user:
->
+> **Execution policy** – if PowerShell blocks the script:
 > ```powershell
 > Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 > ```
-
-### Optional conveniences
-
-| Why | One‑liner |
-|-----|-----------|
-| Run from anywhere | `Copy-Item gitwho.ps1 "$env:ProgramFiles\Git\usr\bin"` |
-| Stand‑alone EXE   | `Install‑Module ps2exe -Scope CurrentUser`  → `ps2exe gitwho.ps1 gitwho.exe` |
 
 ---
 
