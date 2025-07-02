@@ -1,56 +1,58 @@
-# gitwho
+# gitwho – Git Author Manager
 
-> **gitwho** is a single‑file PowerShell CLI for quickly switching the global Git author ( `user.name` / `user.email` ) on a shared Windows machine.
+`gitwho.ps1` is a tiny, self‑contained PowerShell script that lets you **switch the global Git author (user.name / user.email)** on any Windows box that multiple developers share.
 
 ---
 
 ## ✨ Features
 
-* Interactive, colourised menu.
-* Marks the **current** author with `*`.
-* Add new profiles in‑tool – no JSON editing required.
-* Zero install: copy `gitwho.ps1` next to your repo and run `./gitwho`.
-* Optional extras: add to `PATH`, or build a standalone EXE with **ps2exe**.
+* Simple interactive menu with colour highlighting.
+* Marks the **currently active** author with `*`.
+* Add new profiles from within the tool – no manual JSON edits.
+* Zero install: **copy the script into your repo and run `./gitwho.ps1`.**
+* Profiles stored system‑wide in `C:\ProgramData\git-who\profiles.json` so every repo & shell sees the same list.
 
 ---
 
-## 📦 Quick start
-
-Copy **gitwho.ps1** into any Git repository (or a folder already on your `PATH`) and run:
+## Quick start
 
 ```powershell
-./gitwho.ps1
+# inside your project folder
+curl -o gitwho.ps1 https://raw.githubusercontent.com/<you>/gitwho/main/gitwho.ps1
+
+./gitwho.ps1      # launch the menu
 ```
 
-The first run creates `C:\ProgramData\git-who\profiles.json`. Use **A** (Add) in the menu to add profiles.
+On first run the tool creates an empty profile store. Use **A** (Add) to create your first profile; the author is immediately switched.
 
-> **Execution policy** – if PowerShell blocks the script:
+> **Note:** if PowerShell blocks the script, set your execution policy once:
+>
 > ```powershell
 > Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 > ```
 
 ---
 
-## 🚀 Usage
+## Command reference
 
 | Command | What it does |
 |---------|--------------|
 | `gitwho` | Interactive menu (Select / Add / Quit) |
 | `gitwho alice` | Fast‑switch to profile `alice` |
-| `gitwho -List` | Show all profiles and highlight the active one |
+| `gitwho -List` | List all profiles and highlight the active one |
 
-When you select or switch, the tool runs:
+Selecting a profile runs:
 
 ```powershell
 git config --global user.name  "<Name>"
 git config --global user.email "<Email>"
 ```
 
-so every commit you make after that carries the chosen identity.
+so every subsequent commit uses that identity until you switch again.
 
 ---
 
-## 🗄 Profile store format
+## Profile file format
 
 ```json
 {
@@ -59,16 +61,16 @@ so every commit you make after that carries the chosen identity.
 }
 ```
 
-The file is created automatically; you rarely need to touch it.
+The file is created and maintained automatically by the script. You can edit it manually if you like, just keep the structure.
 
 ---
 
-## 📝 License
+## License
 
-MIT – see **LICENSE**.
+MIT – see **LICENSE** for details.
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
-PRs welcome! Please keep new dependencies to a minimum so the script stays drop‑in simple.
+Issues and PRs are welcome. Please keep the script dependency‑free so it remains a single‑file drop‑in tool.
